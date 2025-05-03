@@ -10,9 +10,6 @@ class MinEnergyPage extends StatefulWidget {
 }
 
 class _MinEnergyPageState extends State<MinEnergyPage> {
-  List<bool> completadas = [false, false, false];
-
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,12 +40,11 @@ class _MinEnergyPageState extends State<MinEnergyPage> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 20),
-
             for (int i = 0; i < tareasMin.length; i++)
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    completadas[i] = !completadas[i];
+                    tareasMin[i]['completada'] = ! (tareasMin[i]['completada'] ?? false);
                   });
                 },
                 child: Container(
@@ -59,7 +55,11 @@ class _MinEnergyPageState extends State<MinEnergyPage> {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.pink[50],
+                    gradient: LinearGradient(
+                      colors: (tareasMin[i]['completada'] ?? false)
+                          ? [Color.fromARGB(255, 180, 255, 183), Color.fromARGB(255, 239, 247, 240)]
+                          : [Color.fromARGB(255, 252, 228, 236), Color.fromARGB(255, 252, 228, 236)],
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.2),
@@ -69,6 +69,7 @@ class _MinEnergyPageState extends State<MinEnergyPage> {
                     ],
                   ),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Column(
@@ -79,28 +80,32 @@ class _MinEnergyPageState extends State<MinEnergyPage> {
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
-                                decoration:
-                                    completadas[i]
+                                decoration:(tareasMin[i]['completada'] ?? false)
                                         ? TextDecoration.lineThrough
                                         : TextDecoration.none,
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            SizedBox(height: 5),
                             Text(
                               tareasMin[i]['descripcion'],
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[700],
+                                decoration: (tareasMin[i]['completada'] ?? false)
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
                               ),
                             ),
                           ],
                         ),
                       ),
                       Icon(
-                        completadas[i]
+                        (tareasMin[i]['completada'] ?? false)
                             ? Icons.check_circle
                             : Icons.radio_button_unchecked,
-                        color: completadas[i] ? Colors.green : Colors.grey,
+                        color: (tareasMin[i]['completada'] ?? false)
+                          ?  Colors.green
+                          : Colors.grey,
                       ),
                     ],
                   ),

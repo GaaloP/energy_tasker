@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:energy_tasker/pages/all_tasks.dart';
 import 'package:energy_tasker/data/data_tasks.dart';
 
-
-
 class MaxEnergyPage extends StatefulWidget {
   const MaxEnergyPage({super.key});
 
@@ -12,8 +10,6 @@ class MaxEnergyPage extends StatefulWidget {
 }
 
 class _MaxEnergyPageState extends State<MaxEnergyPage> {
-  List<bool> completadas = [false, false, false];
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,7 +44,7 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    completadas[i] = !completadas[i];
+                    tareasMax[i]['completada'] = !(tareasMax[i]['completada'] ?? false);
                   });
                 },
                 child: Container(
@@ -60,10 +56,9 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     gradient: LinearGradient(
-                      colors:
-                          completadas[i]
-                              ? [Colors.green[200]!, Colors.green[50]!]
-                              : [Colors.white, Colors.grey[100]!],
+                      colors: (tareasMax[i]['completada'] ?? false)
+                          ? [Color.fromARGB(255, 180, 255, 183), Color.fromARGB(255, 239, 247, 240)]
+                          : [Color.fromARGB(255, 178, 251, 244), Color.fromARGB(255, 178, 251, 244)],
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -85,10 +80,9 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                decoration:
-                                    completadas[i]
-                                        ? TextDecoration.lineThrough
-                                        : TextDecoration.none,
+                                decoration: (tareasMax[i]['completada'] ?? false)
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
                               ),
                             ),
                             const SizedBox(height: 5),
@@ -97,10 +91,9 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[700],
-                                decoration:
-                                    completadas[i]
-                                        ? TextDecoration.lineThrough
-                                        : TextDecoration.none,
+                                decoration: (tareasMax[i]['completada'] ?? false)
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
                               ),
                             ),
                           ],
@@ -108,10 +101,12 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
                       ),
                       const SizedBox(width: 10),
                       Icon(
-                        completadas[i]
+                        (tareasMax[i]['completada'] ?? false)
                             ? Icons.check_circle
                             : Icons.radio_button_unchecked,
-                        color: completadas[i] ? Colors.green : Colors.grey,
+                        color: (tareasMax[i]['completada'] ?? false)
+                            ? Colors.green
+                            : Colors.grey,
                       ),
                     ],
                   ),
@@ -138,7 +133,7 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                icon: const Icon(Icons.arrow_forward,color: Color.fromRGBO(255, 255, 255, 1),),
+                icon: const Icon(Icons.arrow_forward, color: Colors.white),
                 label: const Text(
                   'Ver tus tareas',
                   style: TextStyle(fontSize: 16),

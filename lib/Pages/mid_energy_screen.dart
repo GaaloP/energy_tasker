@@ -10,8 +10,6 @@ class MidEnergyPage extends StatefulWidget {
 }
 
 class _MidEnergyPageState extends State<MidEnergyPage> {
-  List<bool> completadas = [false, false, false];
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,7 +24,7 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
             },
           ),
           title: const Text('Tareas - Energía Media'),
-          backgroundColor: Colors.blueGrey,
+          backgroundColor: Colors.blueAccent,
           foregroundColor: Colors.black,
         ),
         body: Column(
@@ -42,12 +40,11 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 20),
-
             for (int i = 0; i < tareasMid.length; i++)
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    completadas[i] = !completadas[i];
+                    tareasMid[i]['completada'] = ! (tareasMid[i]['completada'] ?? false);
                   });
                 },
                 child: Container(
@@ -58,7 +55,11 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.blue[50],
+                    gradient: LinearGradient(
+                      colors: (tareasMid[i]['completada'] ?? false)
+                          ? [Color.fromARGB(255, 180, 255, 183), Color.fromARGB(255, 239, 247, 240)]
+                          : [Color.fromARGB(255, 187, 222, 251), Color.fromARGB(255, 187, 222, 251)],
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.2),
@@ -68,6 +69,7 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
                     ],
                   ),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Column(
@@ -78,28 +80,32 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
-                                decoration:
-                                    completadas[i]
+                                decoration: (tareasMid[i]['completada'] ?? false)
                                         ? TextDecoration.lineThrough
                                         : TextDecoration.none,
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            SizedBox(height: 5),
                             Text(
                               tareasMid[i]['descripcion'],
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[700],
+                                decoration: (tareasMid[i]['completada'] ?? false)
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
                               ),
                             ),
                           ],
                         ),
                       ),
                       Icon(
-                        completadas[i]
+                        (tareasMid[i]['completada'] ?? false)
                             ? Icons.check_circle
                             : Icons.radio_button_unchecked,
-                        color: completadas[i] ? Colors.green : Colors.grey,
+                        color: (tareasMid[i]['completada'] ?? false)
+                          ?  Colors.green
+                          : Colors.grey,
                       ),
                     ],
                   ),
@@ -116,7 +122,7 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.lightBlueAccent,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
                     vertical: 12,
@@ -126,7 +132,7 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                icon: const Icon(Icons.arrow_forward,color: Color.fromRGBO(255, 255, 255, 1),),
+                icon: const Icon(Icons.arrow_forward,color: Color.fromRGBO(148, 196, 251, 1),),
                 label: const Text(
                   'Ver tus tareas',
                   style: TextStyle(fontSize: 16),
