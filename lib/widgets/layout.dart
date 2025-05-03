@@ -1,6 +1,6 @@
 import 'package:energy_tasker/pages/home_screen.dart';
 import 'package:energy_tasker/orgnls/max_energy_screen.dart';
-import 'package:energy_tasker/pages/min_energy_screen.dart';
+import 'package:energy_tasker/pages/min_energy_page.dart';
 import 'package:flutter/material.dart';
 
 class LayoutWidget extends StatefulWidget {

@@ -9,30 +9,26 @@ class AllTasksPage extends StatefulWidget {
 }
 
 class _AllTasksPageState extends State<AllTasksPage> {
-  List<bool> completadas = List.filled(10, false);
-
   List<Map<String, dynamic>> get tareas => [
-    {
-      'categoria': 'Alta energía',
-      'color': Colors.green,
-      'tareas': tareasMax,
-    },
-    {
-      'categoria': 'Energía media',
-      'color': Colors.blueGrey,
-      'tareas': tareasMid,
-    },
-    {
-      'categoria': 'Baja energía',
-      'color': Colors.pink,
-      'tareas': tareasMin,
-    },
-  ];
+        {
+          'categoria': 'Alta energía',
+          'color': Colors.green,
+          'tareas': tareasMax,
+        },
+        {
+          'categoria': 'Energía media',
+          'color': Colors.blueGrey,
+          'tareas': tareasMid,
+        },
+        {
+          'categoria': 'Baja energía',
+          'color': Colors.pink,
+          'tareas': tareasMin,
+        },
+      ];
 
   @override
   Widget build(BuildContext context) {
-    int indexGlobal = 0;
-
     return MaterialApp(
       title: 'Todas las Tareas',
       debugShowCheckedModeBanner: false,
@@ -70,14 +66,13 @@ class _AllTasksPageState extends State<AllTasksPage> {
                 ];
 
                 for (var tarea in grupo['tareas']) {
-                  int currentIndex = indexGlobal;
+                  bool estaCompletada = tarea['completada'] ?? false;
 
                   seccion.add(
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          completadas[currentIndex] =
-                              !completadas[currentIndex];
+                          tarea['completada'] = !estaCompletada;
                         });
                       },
                       child: Container(
@@ -108,7 +103,7 @@ class _AllTasksPageState extends State<AllTasksPage> {
                                     style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold,
-                                      decoration: completadas[currentIndex]
+                                      decoration: estaCompletada
                                           ? TextDecoration.lineThrough
                                           : TextDecoration.none,
                                     ),
@@ -125,10 +120,10 @@ class _AllTasksPageState extends State<AllTasksPage> {
                               ),
                             ),
                             Icon(
-                              completadas[currentIndex]
+                              estaCompletada
                                   ? Icons.check_circle
                                   : Icons.radio_button_unchecked,
-                              color: completadas[currentIndex]
+                              color: estaCompletada
                                   ? Colors.green
                                   : Colors.grey,
                             ),
@@ -137,22 +132,16 @@ class _AllTasksPageState extends State<AllTasksPage> {
                       ),
                     ),
                   );
-
-                  indexGlobal++;
                 }
 
                 return Column(children: seccion);
               }).toList(),
-
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ElevatedButton.icon(
-                  onPressed: () {/*
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const AllTasksPage()),//Cambiar a la ruta para que sea al progreso
-                    );*/
+                  onPressed: () {
+                    // Ir a progreso
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueGrey[200],
@@ -164,8 +153,9 @@ class _AllTasksPageState extends State<AllTasksPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                  ), 
-                  icon: const Icon(Icons.auto_graph_rounded, color: Colors.white),
+                  ),
+                  icon: const Icon(Icons.auto_graph_rounded,
+                      color: Colors.white),
                   label: const Text(
                     'Ver tu progreso',
                     style: TextStyle(fontSize: 16),

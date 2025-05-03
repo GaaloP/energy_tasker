@@ -46,6 +46,46 @@ final List<Map<String, dynamic>> tareasMid = [
       'color': Colors.amber,
       'completada': false,
     },
+    
+    {
+      'titulo': 'Ver un video educativo',
+      'descripcion': 'Algo que te interese o motive.',
+      'icono': Icons.play_circle_fill,
+      'color': Colors.amber,
+      'completada': false,
+    },
+    
+    {
+      'titulo': 'Ver un video educativo',
+      'descripcion': 'Algo que te interese o motive.',
+      'icono': Icons.play_circle_fill,
+      'color': Colors.amber,
+      'completada': false,
+    },
+    
+    {
+      'titulo': 'Ver un video educativo',
+      'descripcion': 'Algo que te interese o motive.',
+      'icono': Icons.play_circle_fill,
+      'color': Colors.amber,
+      'completada': false,
+    },
+    
+    {
+      'titulo': 'Ver un video educativo',
+      'descripcion': 'Algo que te interese o motive.',
+      'icono': Icons.play_circle_fill,
+      'color': Colors.amber,
+      'completada': false,
+    },
+    
+    {
+      'titulo': 'Ver un video educativo',
+      'descripcion': 'Algo que te interese o motive.',
+      'icono': Icons.play_circle_fill,
+      'color': Colors.amber,
+      'completada': true,
+    },
   ];
 
 final List<Map<String, dynamic>> tareasMin = [
