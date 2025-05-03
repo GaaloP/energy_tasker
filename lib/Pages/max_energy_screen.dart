@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:energy_tasker/pages/all_tasks.dart';
+import 'package:energy_tasker/data/data_tasks.dart';
+
+
 
 class MaxEnergyPage extends StatefulWidget {
   const MaxEnergyPage({super.key});
@@ -10,27 +13,6 @@ class MaxEnergyPage extends StatefulWidget {
 
 class _MaxEnergyPageState extends State<MaxEnergyPage> {
   List<bool> completadas = [false, false, false];
-
-  final List<Map<String, dynamic>> tareas = [
-    {
-      'titulo': 'Estudiar Flutter',
-      'descripcion': 'Avanzar en el curso y practicar widgets.',
-      'icono': Icons.code,
-      'color': Colors.indigo,
-    },
-    {
-      'titulo': 'Hacer ejercicio',
-      'descripcion': '30 minutos de cardio + estiramientos.',
-      'icono': Icons.fitness_center,
-      'color': Colors.redAccent,
-    },
-    {
-      'titulo': 'Leer un libro',
-      'descripcion': 'Leer 10 páginas del libro de desarrollo personal.',
-      'icono': Icons.menu_book,
-      'color': Colors.orange,
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +44,7 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
-            for (int i = 0; i < tareas.length; i++)
+            for (int i = 0; i < tareasMax.length; i++)
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -99,7 +81,7 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              tareas[i]['titulo'],
+                              tareasMax[i]['titulo'],
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -111,7 +93,7 @@ class _MaxEnergyPageState extends State<MaxEnergyPage> {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              tareas[i]['descripcion'],
+                              tareasMax[i]['descripcion'],
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[700],

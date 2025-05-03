@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:energy_tasker/pages/all_tasks.dart';
+import 'package:energy_tasker/data/data_tasks.dart';
 
 class MidEnergyPage extends StatefulWidget {
   const MidEnergyPage({super.key});
@@ -10,27 +11,6 @@ class MidEnergyPage extends StatefulWidget {
 
 class _MidEnergyPageState extends State<MidEnergyPage> {
   List<bool> completadas = [false, false, false];
-
-  final List<Map<String, dynamic>> tareas = [
-    {
-      'titulo': 'Leer un capítulo de un libro',
-      'descripcion': 'Algo tranquilo y que te guste.',
-      'icono': Icons.menu_book,
-      'color': Colors.blue,
-    },
-    {
-      'titulo': 'Ordenar tu escritorio',
-      'descripcion': 'Solo lo básico, que se vea decente.',
-      'icono': Icons.cleaning_services,
-      'color': Colors.deepPurple,
-    },
-    {
-      'titulo': 'Ver un video educativo',
-      'descripcion': 'Algo que te interese o motive.',
-      'icono': Icons.play_circle_fill,
-      'color': Colors.amber,
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +43,7 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
             ),
             const SizedBox(height: 20),
 
-            for (int i = 0; i < tareas.length; i++)
+            for (int i = 0; i < tareasMid.length; i++)
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -94,7 +74,7 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              tareas[i]['titulo'],
+                              tareasMid[i]['titulo'],
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
@@ -106,7 +86,7 @@ class _MidEnergyPageState extends State<MidEnergyPage> {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              tareas[i]['descripcion'],
+                              tareasMid[i]['descripcion'],
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[700],

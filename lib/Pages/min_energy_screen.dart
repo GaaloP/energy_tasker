@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:energy_tasker/pages/all_tasks.dart';
+import 'package:energy_tasker/data/data_tasks.dart';
 
 class MinEnergyPage extends StatefulWidget {
   const MinEnergyPage({super.key});
@@ -11,27 +12,7 @@ class MinEnergyPage extends StatefulWidget {
 class _MinEnergyPageState extends State<MinEnergyPage> {
   List<bool> completadas = [false, false, false];
 
-  final List<Map<String, dynamic>> tareas = [
-    {
-      'titulo': 'Tomar agua',
-      'descripcion': 'Un vaso para refrescarte.',
-      'icono': Icons.local_drink,
-      'color': Colors.lightBlue,
-    },
-    {
-      'titulo': 'Respirar profundo',
-      'descripcion': '3 minutos de respiración lenta.',
-      'icono': Icons.self_improvement,
-      'color': Colors.purple,
-    },
-    {
-      'titulo': 'Escuchar música tranquila',
-      'descripcion': 'Tu playlist relajante favorita.',
-      'icono': Icons.music_note,
-      'color': Colors.pink,
-    },
-  ];
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,7 +44,7 @@ class _MinEnergyPageState extends State<MinEnergyPage> {
             ),
             const SizedBox(height: 20),
 
-            for (int i = 0; i < tareas.length; i++)
+            for (int i = 0; i < tareasMin.length; i++)
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -94,7 +75,7 @@ class _MinEnergyPageState extends State<MinEnergyPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              tareas[i]['titulo'],
+                              tareasMin[i]['titulo'],
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
@@ -106,7 +87,7 @@ class _MinEnergyPageState extends State<MinEnergyPage> {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              tareas[i]['descripcion'],
+                              tareasMin[i]['descripcion'],
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey[700],

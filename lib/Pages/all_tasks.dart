@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:energy_tasker/data/data_tasks.dart';
 
 class AllTasksPage extends StatefulWidget {
   const AllTasksPage({super.key});
@@ -10,45 +11,16 @@ class AllTasksPage extends StatefulWidget {
 class _AllTasksPageState extends State<AllTasksPage> {
   List<bool> completadas = List.filled(10, false);
 
-  final List<Map<String, dynamic>> tareas = [
+  List<Map<String, dynamic>> get tareas => [
     {
       'categoria': 'Alta energía',
       'color': Colors.green,
-      'tareas': [
-        {
-          'titulo': 'Hacer ejercicio',
-          'descripcion': '30 minutos de cardio o pesas.',
-          'repeticion': 1,
-        },
-        {
-          'titulo': 'Limpiar tu cuarto',
-          'descripcion': 'Rápido, como reto de 15 minutos.',
-        },
-        {
-          'titulo': 'Escribir en tu diario',
-          'descripcion': 'Exprésate y organiza tus ideas.',
-          'repeticion': 1,
-        },
-      ],
+      'tareas': tareasMax,
     },
     {
       'categoria': 'Energía media',
       'color': Colors.blueGrey,
-      'tareas': [
-        {
-          'titulo': 'Leer un capítulo de un libro',
-          'descripcion': 'Algo tranquilo y que te guste.',
-        },
-        {
-          'titulo': 'Ordenar tu escritorio',
-          'descripcion': 'Solo lo básico, que se vea decente.',
-          'repeticion': 1,
-        },
-        {
-          'titulo': 'Ver un video educativo',
-          'descripcion': 'Algo que te interese o motive.',
-        },
-      ],
+      'tareas': tareasMid,
     },
     {
       'categoria': 'Baja energía',
