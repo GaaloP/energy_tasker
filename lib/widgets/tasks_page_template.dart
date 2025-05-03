@@ -1,3 +1,4 @@
+import 'package:energy_tasker/widgets/task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:energy_tasker/pages/all_tasks.dart';
 
@@ -55,64 +56,17 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
                 final tarea = widget.tasks[i];
                 final completada = tarea['completada'] ?? false;
 
-                return GestureDetector(
+                return TaskCard(
+                  tarea: tarea,
+                  completada: completada,
+                  colores: completada
+                      ? [const Color.fromARGB(255, 180, 255, 183), const Color.fromARGB(255, 239, 247, 240)]
+                      : [widget.taskColor, widget.taskColor],
                   onTap: () {
                     setState(() {
                       tarea['completada'] = !completada;
                     });
                   },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      gradient: LinearGradient(
-                        colors: completada
-                            ? [Color.fromARGB(255, 180, 255, 183), Color.fromARGB(255, 239, 247, 240)]
-                            : [widget.taskColor, widget.taskColor],
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 5,
-                          offset: const Offset(2, 4),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                tarea['titulo'],
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  decoration: completada ? TextDecoration.lineThrough : TextDecoration.none,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                tarea['descripcion'],
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey[700],
-                                  decoration: completada ? TextDecoration.lineThrough : TextDecoration.none,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Icon(
-                          completada ? Icons.check_circle : Icons.radio_button_unchecked,
-                          color: completada ? Colors.green : Colors.grey,
-                        ),
-                      ],
-                    ),
-                  ),
                 );
               },
             ),

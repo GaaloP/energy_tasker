@@ -1,3 +1,4 @@
+import 'package:energy_tasker/widgets/task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:energy_tasker/data/data_tasks.dart';
 
@@ -12,159 +13,108 @@ class _AllTasksPageState extends State<AllTasksPage> {
   List<Map<String, dynamic>> get tareas => [
         {
           'categoria': 'Alta energía',
-          'color': Colors.green,
+          'color': Colors.teal,
+          'colorcard': const Color.fromARGB(255, 178, 251, 244),
           'tareas': tareasMax,
         },
         {
           'categoria': 'Energía media',
-          'color': Colors.blueGrey,
+          'color': Colors.blueAccent,
+          'colorcard': const Color.fromARGB(255, 187, 222, 251),
           'tareas': tareasMid,
         },
         {
           'categoria': 'Baja energía',
           'color': Colors.pink,
+          'colorcard': const Color.fromARGB(255, 252, 228, 236),
           'tareas': tareasMin,
         },
       ];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Todas las Tareas',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.keyboard_arrow_left_outlined),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: const Text('Todas las Tareas'),
-          backgroundColor: Colors.blueGrey[200],
-          foregroundColor: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          onPressed: () => Navigator.pop(context),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              ...tareas.map((grupo) {
-                List<Widget> seccion = [
+        title: const Text('Todas las Tareas'),
+        backgroundColor: Colors.blueGrey[100],
+        foregroundColor: Colors.black87,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ...tareas.map((grupo) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      const SizedBox(width: 30),
-                      Text(
-                        grupo['categoria'],
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: grupo['color'],
-                        ),
-                      ),
-                    ],
-                  ),
-                ];
-
-                for (var tarea in grupo['tareas']) {
-                  bool estaCompletada = tarea['completada'] ?? false;
-
-                  seccion.add(
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          tarea['completada'] = !estaCompletada;
-                        });
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 20,
-                        ),
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: grupo['color'].withOpacity(0.05),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              blurRadius: 4,
-                              offset: const Offset(2, 4),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    tarea['titulo'],
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      decoration: estaCompletada
-                                          ? TextDecoration.lineThrough
-                                          : TextDecoration.none,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    tarea['descripcion'],
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.grey[700],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Icon(
-                              estaCompletada
-                                  ? Icons.check_circle
-                                  : Icons.radio_button_unchecked,
-                              color: estaCompletada
-                                  ? Colors.green
-                                  : Colors.grey,
-                            ),
-                          ],
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      grupo['categoria'],
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: grupo['color'],
                       ),
                     ),
-                  );
-                }
+                  ),
+                  const SizedBox(height: 10),
+                  ...grupo['tareas'].map<Widget>((tarea) {
+                    bool completada = tarea['completada'] ?? false;
 
-                return Column(children: seccion);
-              }).toList(),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    // Ir a progreso
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueGrey[200],
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 12,
-                      horizontal: 30,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
+                    return TaskCard(
+    tarea: tarea,
+    completada: completada,
+    colores: completada
+        ? const [
+            Color.fromARGB(255, 180, 255, 183),
+            Color.fromARGB(255, 239, 247, 240),
+          ]
+        : [
+            grupo['colorcard'],
+            grupo['colorcard'],
+          ],
+    onTap: () {
+      setState(() {
+        tarea['completada'] = !completada;
+      });
+    },
+  );
+}).toList(),
+                ],
+              );
+            }).toList(),
+            const SizedBox(height: 30),
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  // Navega a la pantalla de progreso (pendiente)
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueGrey[300],
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 14, horizontal: 32),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  icon: const Icon(Icons.auto_graph_rounded,
-                      color: Colors.white),
-                  label: const Text(
-                    'Ver tu progreso',
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  elevation: 4,
+                ),
+                icon: const Icon(Icons.auto_graph_rounded),
+                label: const Text(
+                  'Ver tu progreso',
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
-              const SizedBox(height: 30),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
