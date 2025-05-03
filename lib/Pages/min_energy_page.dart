@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/data_tasks.dart';
+import '../data/min_energy_tasks.dart';
 import '../widgets/tasks_page_template.dart';
 
 class MinEnergyPage extends StatelessWidget {

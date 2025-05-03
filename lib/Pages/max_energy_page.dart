@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/data_tasks.dart';
+import '../data/max_energy_tasks.dart';
 import '../widgets/tasks_page_template.dart';
 
 class MaxEnergyPage extends StatelessWidget {

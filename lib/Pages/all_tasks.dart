@@ -1,6 +1,6 @@
 import 'package:energy_tasker/widgets/task_card.dart';
 import 'package:flutter/material.dart';
-import 'package:energy_tasker/data/data_tasks.dart';
+import 'package:energy_tasker/data/tasks_categories.dart';
 
 class AllTasksPage extends StatefulWidget {
   const AllTasksPage({super.key});
@@ -10,27 +10,8 @@ class AllTasksPage extends StatefulWidget {
 }
 
 class _AllTasksPageState extends State<AllTasksPage> {
-  List<Map<String, dynamic>> get tareas => [
-        {
-          'categoria': 'Alta energía',
-          'color': Colors.teal,
-          'colorcard': const Color.fromARGB(255, 178, 251, 244),
-          'tareas': tareasMax,
-        },
-        {
-          'categoria': 'Energía media',
-          'color': Colors.blueAccent,
-          'colorcard': const Color.fromARGB(255, 187, 222, 251),
-          'tareas': tareasMid,
-        },
-        {
-          'categoria': 'Baja energía',
-          'color': Colors.pink,
-          'colorcard': const Color.fromARGB(255, 252, 228, 236),
-          'tareas': tareasMin,
-        },
-      ];
-
+  final tareas = categoriasTareas;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
