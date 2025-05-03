@@ -6,7 +6,7 @@ class EnergyTaskPage extends StatefulWidget {
   final String title;
   final String subtitle;
   final IconData icon;
-  final Color iconColor;
+  final Color color;
   final Color appBarColor;
   final Color taskColor;
   final List<Map<String, dynamic>> tasks;
@@ -16,7 +16,7 @@ class EnergyTaskPage extends StatefulWidget {
     required this.title,
     required this.subtitle,
     required this.icon,
-    required this.iconColor,
+    required this.color,
     required this.appBarColor,
     required this.taskColor,
     required this.tasks,
@@ -35,6 +35,7 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
           icon: const Icon(Icons.keyboard_arrow_left_outlined),
           onPressed: () => Navigator.pop(context),
         ),
+        
         title: Text(widget.title),
         backgroundColor: widget.appBarColor,
         foregroundColor: Colors.black,
@@ -42,7 +43,7 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
       body: Column(
         children: [
           const SizedBox(height: 20),
-          Icon(widget.icon, size: 80, color: widget.iconColor),
+          Icon(widget.icon, size: 80,),
           Text(
             widget.subtitle,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),

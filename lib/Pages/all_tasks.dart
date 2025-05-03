@@ -10,7 +10,7 @@ class AllTasksPage extends StatefulWidget {
 }
 
 class _AllTasksPageState extends State<AllTasksPage> {
-  final tareas = categoriasTareas;
+  final tareas = categoriTasks;
   
   @override
   Widget build(BuildContext context) {

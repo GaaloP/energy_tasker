@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/min_energy_tasks.dart';
+import 'package:energy_tasker/data/tasks_categories.dart';
 import '../widgets/tasks_page_template.dart';
 
 class MinEnergyPage extends StatelessWidget {
@@ -11,10 +11,10 @@ class MinEnergyPage extends StatelessWidget {
       title: 'Tareas - Energía Baja',
       subtitle: 'No pasa nada, ve poco a poco',
       icon: Icons.sentiment_very_dissatisfied,
-      iconColor: Colors.pink,
-      appBarColor: Colors.pinkAccent,
+      color: categoriTasks[2]['color'],
+      appBarColor: categoriTasks[2]['colorCard'],
       taskColor: Color.fromARGB(255, 252, 228, 236),
-      tasks: tareasMin,
+      tasks: categoriTasks[2]['tareas'],
     );
   }
 }

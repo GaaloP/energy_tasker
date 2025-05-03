@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/mid_energy_tasks.dart';
+import 'package:energy_tasker/data/tasks_categories.dart';
 import '../widgets/tasks_page_template.dart';
 
 class MidEnergyPage extends StatelessWidget {
@@ -11,10 +11,10 @@ class MidEnergyPage extends StatelessWidget {
       title: 'Tareas - Energía Media',
       subtitle: 'Día regular, tareas ligeras',
       icon: Icons.sentiment_neutral,
-      iconColor: Colors.blueGrey,
-      appBarColor: Colors.blueAccent,
+      color: categoriTasks[1]['color'],
+      appBarColor: categoriTasks[1]['colorCard'],
       taskColor: Color.fromARGB(255, 187, 222, 251),
-      tasks: tareasMid,
+      tasks: categoriTasks[1]['tareas'],
     );
   }
 }
