@@ -89,14 +89,6 @@ class _MinEnergyPageState extends State<MinEnergyPage> {
                   ),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        backgroundColor: tareas[i]['color'].withOpacity(0.1),
-                        child: Icon(
-                          tareas[i]['icono'],
-                          color: tareas[i]['color'],
-                        ),
-                      ),
-                      const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

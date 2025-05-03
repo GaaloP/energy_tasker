@@ -141,6 +141,14 @@ class _AllTasksPageState extends State<AllTasksPage> {
                         ),
                         child: Row(
                           children: [
+                            CircleAvatar(
+                              backgroundColor: grupo['color'].withOpacity(0.1),
+                              child: Icon(
+                                tarea['icono'],
+                                color: grupo['color'],
+                              ),
+                            ),
+                            const SizedBox(width: 16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

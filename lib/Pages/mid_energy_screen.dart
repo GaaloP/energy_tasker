@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:energy_tasker/pages/all_tasks.dart';
 
-class MidEnergyScreen extends StatefulWidget {
-  const MidEnergyScreen({super.key});
+class MidEnergyPage extends StatefulWidget {
+  const MidEnergyPage({super.key});
 
   @override
-  State<MidEnergyScreen> createState() => _MidEnergyScreenState();
+  State<MidEnergyPage> createState() => _MidEnergyPageState();
 }
 
-class _MidEnergyScreenState extends State<MidEnergyScreen> {
+class _MidEnergyPageState extends State<MidEnergyPage> {
   List<bool> completadas = [false, false, false];
 
   final List<Map<String, dynamic>> tareas = [
@@ -89,14 +89,6 @@ class _MidEnergyScreenState extends State<MidEnergyScreen> {
                   ),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        backgroundColor: tareas[i]['color'].withOpacity(0.1),
-                        child: Icon(
-                          tareas[i]['icono'],
-                          color: tareas[i]['color'],
-                        ),
-                      ),
-                      const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
