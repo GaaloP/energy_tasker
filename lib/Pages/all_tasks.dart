@@ -25,21 +25,7 @@ class _AllTasksPageState extends State<AllTasksPage> {
     {
       'categoria': 'Baja energía',
       'color': Colors.pink,
-      'tareas': [
-        {
-          'titulo': 'Tomar agua',
-          'descripcion': 'Un vaso para refrescarte.',
-        },
-        {
-          'titulo': 'Respirar profundo',
-          'descripcion': '3 minutos de respiración lenta.',
-        },
-        {
-          'titulo': 'Escuchar música tranquila',
-          'descripcion': 'Tu playlist relajante favorita.',
-          'repeticion': 1,
-        },
-      ],
+      'tareas': tareasMin,
     },
   ];
 
