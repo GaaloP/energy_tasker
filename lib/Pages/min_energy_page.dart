@@ -10,10 +10,9 @@ class MinEnergyPage extends StatelessWidget {
     return EnergyTaskPage(
       title: 'Tareas - Energía Baja',
       subtitle: 'No pasa nada, ve poco a poco',
-      icon: Icons.sentiment_very_dissatisfied,
-      color: categoriTasks[2]['color'],
-      appBarColor: categoriTasks[2]['colorCard'],
-      taskColor: Color.fromARGB(255, 252, 228, 236),
+      icon: '🤒',
+      appBarColor: categoriTasks[2]['color'],
+      taskColor: categoriTasks[2]['colorCard'],
       tasks: categoriTasks[2]['tareas'],
     );
   }

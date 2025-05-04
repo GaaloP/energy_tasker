@@ -10,10 +10,9 @@ class MidEnergyPage extends StatelessWidget {
     return EnergyTaskPage(
       title: 'Tareas - Energía Media',
       subtitle: 'Día regular, tareas ligeras',
-      icon: Icons.sentiment_neutral,
-      color: categoriTasks[1]['color'],
-      appBarColor: categoriTasks[1]['colorCard'],
-      taskColor: Color.fromARGB(255, 187, 222, 251),
+      icon: '😒',
+      appBarColor: categoriTasks[1]['color'],
+      taskColor: categoriTasks[1]['colorCard'],
       tasks: categoriTasks[1]['tareas'],
     );
   }

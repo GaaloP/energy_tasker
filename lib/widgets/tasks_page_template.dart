@@ -5,8 +5,7 @@ import 'package:energy_tasker/pages/all_tasks.dart';
 class EnergyTaskPage extends StatefulWidget {
   final String title;
   final String subtitle;
-  final IconData icon;
-  final Color color;
+  final String icon;
   final Color appBarColor;
   final Color taskColor;
   final List<Map<String, dynamic>> tasks;
@@ -16,7 +15,6 @@ class EnergyTaskPage extends StatefulWidget {
     required this.title,
     required this.subtitle,
     required this.icon,
-    required this.color,
     required this.appBarColor,
     required this.taskColor,
     required this.tasks,
@@ -32,7 +30,7 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.keyboard_arrow_left_outlined),
+          icon: Icon(Icons.keyboard_arrow_left_outlined),
           onPressed: () => Navigator.pop(context),
         ),
         
@@ -42,59 +40,40 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 20),
-          Icon(widget.icon, size: 80,),
+          SizedBox(height: 20),
+          Text(widget.icon, style: TextStyle( fontSize: 40)),
           Text(
             widget.subtitle,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.only(bottom: 20),
-              itemCount: widget.tasks.length,
-              itemBuilder: (context, i) {
-                final tarea = widget.tasks[i];
-                final completada = tarea['completada'] ?? false;
-
-                return TaskCard(
-                  tarea: tarea,
-                  completada: completada,
-                  colores: completada
-                      ? [const Color.fromARGB(255, 180, 255, 183), const Color.fromARGB(255, 239, 247, 240)]
-                      : [widget.taskColor, widget.taskColor],
-                  onTap: () {
-                    setState(() {
-                      tarea['completada'] = !completada;
-                    });
-                  },
-                );
-              },
-            ),
+          SizedBox(height: 20),
+          TaskList(
+            tasks: widget.tasks,
+            taskColor: widget.taskColor,
           ),
-        ],
+         ],
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: ElevatedButton.icon(
             onPressed: () async {
               await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const AllTasksPage()),
+                MaterialPageRoute(builder: (_) => AllTasksPage()),
               );
               setState(() {}); // Para actualizar si hay cambios
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: widget.appBarColor,
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
             ),
-            icon: const Icon(Icons.arrow_forward),
-            label: const Text(
+            icon: Icon(Icons.arrow_forward),
+            label: Text(
               'Ver tus tareas',
               style: TextStyle(fontSize: 16),
             ),
@@ -102,5 +81,45 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
         ),
       ),
     );
+  }
+}
+
+class TaskList extends StatefulWidget {
+  const TaskList({super.key, required this.tasks, required this.taskColor});
+
+  final List<Map<String, dynamic>> tasks;
+  final Color taskColor;
+
+  @override
+  State<TaskList> createState() => _TaskListState();
+}
+
+class _TaskListState extends State<TaskList> {
+  @override
+  Widget build(BuildContext context) {
+    return  Expanded(
+      child: ListView.builder(
+        padding: EdgeInsets.only(bottom: 20),
+        itemCount: widget.tasks.length,
+        itemBuilder: (context, i) {
+          final tarea = widget.tasks[i];
+          final completada = tarea['completada'] ?? false;
+
+          return TaskCard(
+            tarea: tarea,
+            completada: completada,
+            colores: completada
+                ? [Color.fromARGB(255, 180, 255, 183), Color.fromARGB(255, 239, 247, 240)]
+                : [widget.taskColor, widget.taskColor],
+            onTap: () {
+              setState(() {
+                tarea['completada'] = !completada;
+              });
+            },
+          );
+        },
+      ),
+    );
+        
   }
 }

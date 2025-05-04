@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../data/tasks_categories.dart';
 import '../widgets/tasks_page_template.dart';
 
-
 class MaxEnergyPage extends StatelessWidget {
   const MaxEnergyPage({super.key});
 
@@ -11,10 +10,9 @@ class MaxEnergyPage extends StatelessWidget {
     return EnergyTaskPage(
       title: 'Tareas - Energía Alta',
       subtitle: '¡Hoy estás con toda la energía!',
-      icon: Icons.sentiment_very_satisfied,
-      color: categoriTasks[0]['color'],
+      icon: '😁',
       appBarColor: categoriTasks[0]['color'],
-      taskColor: Color.fromARGB(255, 178, 251, 244),
+      taskColor: categoriTasks[0]['colorCard'],
       tasks: categoriTasks[0]['tareas'],
     );
   }

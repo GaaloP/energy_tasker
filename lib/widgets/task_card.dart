@@ -19,8 +19,8 @@ class TaskCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        padding: const EdgeInsets.all(16),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(colors: colores),
@@ -28,7 +28,7 @@ class TaskCard extends StatelessWidget {
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
               blurRadius: 5,
-              offset: const Offset(2, 4),
+              offset: Offset(2, 4),
             ),
           ],
         ),
@@ -49,7 +49,7 @@ class TaskCard extends StatelessWidget {
                           : TextDecoration.none,
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  SizedBox(height: 5),
                   Text(
                     tarea['descripcion'],
                     style: TextStyle(

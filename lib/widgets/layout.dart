@@ -19,7 +19,6 @@ class _LayoutWidgetState extends State<LayoutWidget> {
     HomeScreen(),
     MinEnergyPage(),
     MaxEnergyPage()
-    //ProfileSection(),
   ];
 
   void _onItemTapped(int index) {
@@ -51,7 +50,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor:  Color.fromARGB(255, 118, 187, 119), //MyColors.bar,
+      backgroundColor:  Color.fromARGB(255, 118, 187, 119), 
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -100,11 +99,11 @@ class MyNavBar extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         currentIndex: currentIndex,
-        backgroundColor:  Color.fromARGB(255, 118, 187, 119),//MyColors.bar,
+        backgroundColor:  Color.fromARGB(255, 118, 187, 119),
         onTap: onTap,
         selectedItemColor: Colors.brown,
-        unselectedItemColor: const Color.fromARGB(255, 15, 74, 13),//MyColors.primary,
-        items: const [
+        unselectedItemColor: Color.fromARGB(255, 15, 74, 13),
+        items: [
           BottomNavigationBarItem(icon: Icon(Icons.home, size: 35,), label: "Inicio"),
           BottomNavigationBarItem(icon: Icon(Icons.auto_graph, size: 35,), label: "Progreso"),
           BottomNavigationBarItem(icon: Icon(Icons.add, size: 35,), label: "Nueva tarea"),
