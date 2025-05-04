@@ -31,7 +31,10 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.keyboard_arrow_left_outlined),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+            FocusScope.of(context).unfocus(); // Para cerrar el teclado
+          } 
         ),
         
         title: Text(widget.title),

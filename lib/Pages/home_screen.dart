@@ -16,15 +16,15 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 46, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 30),
-            EnergyCard(
+            EnergyForm(
             ),
           ],
         ),
     );
   }
 }
-class EnergyCard extends StatelessWidget {
-  const EnergyCard({
+class EnergyForm extends StatelessWidget {
+  const EnergyForm({
     super.key,
     this.content = const SizedBox.shrink(),
   });

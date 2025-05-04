@@ -20,17 +20,15 @@ class _LayoutWidgetState extends State<LayoutWidget> {
     HomeScreen(),
     MinEnergyPage(),
     NewTaskFormPage(
-    onTareaCreada: (tarea, categoria) {
-      final categoriaData = categoriTasks.firstWhere(
-        (cat) => cat['categoria'] == categoria
-      );
+      onTareaCreada: (tarea, categoria) {
+        final categoriaData = categoriTasks.firstWhere(
+          (cat) => cat['categoria'] == categoria
+        );
 
-      if (categoriaData != null) {
         final List<Map<String, dynamic>> tareas = categoriaData['tareas'];
         tareas.add(tarea);
-      }
-    },
-  ),
+            },
+    ),
   ];
 
   void _onItemTapped(int index) {
