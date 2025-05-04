@@ -1,5 +1,6 @@
+import 'package:energy_tasker/Pages/new_task_form_page.dart';
 import 'package:energy_tasker/pages/home_screen.dart';
-import 'package:energy_tasker/orgnls/max_energy_screen.dart';
+import 'package:energy_tasker/data/tasks_categories.dart';
 import 'package:energy_tasker/pages/min_energy_page.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,18 @@ class _LayoutWidgetState extends State<LayoutWidget> {
   final List<Widget> _screens = [
     HomeScreen(),
     MinEnergyPage(),
-    MaxEnergyPage()
+    NewTaskFormPage(
+    onTareaCreada: (tarea, categoria) {
+      final categoriaData = categoriTasks.firstWhere(
+        (cat) => cat['categoria'] == categoria
+      );
+
+      if (categoriaData != null) {
+        final List<Map<String, dynamic>> tareas = categoriaData['tareas'];
+        tareas.add(tarea);
+      }
+    },
+  ),
   ];
 
   void _onItemTapped(int index) {

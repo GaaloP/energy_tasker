@@ -38,7 +38,7 @@ class EnergyCard extends StatelessWidget {
       width: 300,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Color.fromARGB(255, 118, 187, 119), //MyColors.bar,
+          color: Color.fromARGB(255, 118, 187, 119),
           width: 2),
       ),
       child: SizedBox.expand(
