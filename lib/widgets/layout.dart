@@ -1,7 +1,7 @@
 import 'package:energy_tasker/Pages/new_task_form_page.dart';
+import 'package:energy_tasker/Pages/progress_page.dart';
 import 'package:energy_tasker/pages/home_screen.dart';
 import 'package:energy_tasker/data/tasks_categories.dart';
-import 'package:energy_tasker/pages/min_energy_page.dart';
 import 'package:flutter/material.dart';
 
 class LayoutWidget extends StatefulWidget {
@@ -11,25 +11,8 @@ class LayoutWidget extends StatefulWidget {
   _LayoutWidgetState createState() => _LayoutWidgetState();
 }
 
-
-
 class _LayoutWidgetState extends State<LayoutWidget> {
   int _selectedIndex = 0;
-
-  final List<Widget> _screens = [
-    HomeScreen(),
-    MinEnergyPage(),
-    NewTaskFormPage(
-      onTareaCreada: (tarea, categoria) {
-        final categoriaData = categoriTasks.firstWhere(
-          (cat) => cat['categoria'] == categoria
-        );
-
-        final List<Map<String, dynamic>> tareas = categoriaData['tareas'];
-        tareas.add(tarea);
-            },
-    ),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -39,12 +22,25 @@ class _LayoutWidgetState extends State<LayoutWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _screens,
+    // 👇 Esto se reconstruye con cada cambio de _selectedIndex
+    final List<Widget> _screens = [
+      HomeScreen(),
+      ProgressPage(), // <- Siempre nueva instancia
+      NewTaskFormPage(
+        onTareaCreada: (tarea, categoria) {
+          final categoriaData = categoriTasks.firstWhere(
+              (cat) => cat['categoria'] == categoria);
+
+          final List<Map<String, dynamic>> tareas = categoriaData['tareas'];
+          tareas.add(tarea);
+        },
       ),
+    ];
+
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      appBar: MyAppBar(),
+      body: _screens[_selectedIndex], // 👈 Alternativa simple a IndexedStack
       bottomNavigationBar: MyNavBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -60,11 +56,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor:  Color.fromARGB(255, 118, 187, 119), 
+      backgroundColor: Color.fromARGB(255, 118, 187, 119),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //Image(image: AssetImage(/*"assets/AppLogo.png"*/""), width: 45),
           SizedBox(width: 10),
           Text(
             "Energy Tasker",
@@ -109,14 +104,14 @@ class MyNavBar extends StatelessWidget {
       ),
       child: BottomNavigationBar(
         currentIndex: currentIndex,
-        backgroundColor:  Color.fromARGB(255, 118, 187, 119),
+        backgroundColor: Color.fromARGB(255, 118, 187, 119),
         onTap: onTap,
         selectedItemColor: Colors.brown,
         unselectedItemColor: Color.fromARGB(255, 15, 74, 13),
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home, size: 35,), label: "Inicio"),
-          BottomNavigationBarItem(icon: Icon(Icons.auto_graph, size: 35,), label: "Progreso"),
-          BottomNavigationBarItem(icon: Icon(Icons.add, size: 35,), label: "Nueva tarea"),
+          BottomNavigationBarItem(icon: Icon(Icons.home, size: 35), label: "Inicio"),
+          BottomNavigationBarItem(icon: Icon(Icons.auto_graph, size: 35), label: "Progreso"),
+          BottomNavigationBarItem(icon: Icon(Icons.add, size: 35), label: "Nueva tarea"),
         ],
       ),
     );
