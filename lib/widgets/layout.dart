@@ -1,6 +1,6 @@
-import 'package:energy_tasker/Pages/new_task_form_page.dart';
-import 'package:energy_tasker/Pages/progress_page.dart';
-import 'package:energy_tasker/pages/home_screen.dart';
+import 'package:energy_tasker/pages/new_task_form_section.dart';
+import 'package:energy_tasker/pages/progress_section.dart';
+import 'package:energy_tasker/pages/home_section.dart';
 import 'package:energy_tasker/data/tasks_categories.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +12,10 @@ class LayoutWidget extends StatefulWidget {
 }
 
 class _LayoutWidgetState extends State<LayoutWidget> {
+  // Índice de la pantalla seleccionada
   int _selectedIndex = 0;
 
+  // Cambiar el índice seleccionado al tocar un ítem en el BottomNavigationBar
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -22,47 +24,48 @@ class _LayoutWidgetState extends State<LayoutWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // 👇 Esto se reconstruye con cada cambio de _selectedIndex
+    // Lista de pantallas que se alternan en función de _selectedIndex
     final List<Widget> _screens = [
       HomeScreen(),
-      ProgressPage(), // <- Siempre nueva instancia
+      ProgressPage(), // Página de progreso
       NewTaskFormPage(
         onTareaCreada: (tarea, categoria) {
-          final categoriaData = categoriTasks.firstWhere(
-              (cat) => cat['categoria'] == categoria);
+          // Añadir la nueva tarea a la categoría correspondiente
+          final categoryData = categoryTasks.firstWhere(
+              (cat) => cat['category'] == categoria);
 
-          final List<Map<String, dynamic>> tareas = categoriaData['tareas'];
-          tareas.add(tarea);
+          final List<Map<String, dynamic>> tareas = categoryData['tasks'];
+          tareas.add(tarea); // Añadir la tarea
         },
       ),
     ];
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      appBar: MyAppBar(),
-      body: _screens[_selectedIndex], // 👈 Alternativa simple a IndexedStack
+      backgroundColor: Color.fromARGB(255, 255, 255, 255), // Fondo blanco
+      appBar: MyAppBar(), // Barra superior personalizada
+      body: _screens[_selectedIndex], // Cambia el cuerpo según el índice seleccionado
       bottomNavigationBar: MyNavBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        currentIndex: _selectedIndex, // Índice actual para destacar el ítem
+        onTap: _onItemTapped, // Acción al tocar un ítem
       ),
     );
   }
 }
 
-// Widget para la barra superior
+// Widget para la barra superior (AppBar)
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MyAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color.fromARGB(255, 118, 187, 119),
+      backgroundColor: Color.fromARGB(255, 118, 187, 119), // Color de fondo verde
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center, // Centrar el título
         children: [
-          SizedBox(width: 10),
+          SizedBox(width: 10), // Espaciado entre el borde y el título
           Text(
-            "Energy Tasker",
+            "Energy Tasker", // Título de la app
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -74,14 +77,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
+  // Definir el tamaño preferido de la AppBar
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-// Widget para la barra de navegación inferior
+// Widget para la barra de navegación inferior (BottomNavigationBar)
 class MyNavBar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onTap;
+  final int currentIndex; // Índice de la pestaña seleccionada
+  final Function(int) onTap; // Función que se llama al tocar un ítem
 
   const MyNavBar({
     super.key,
@@ -95,6 +99,7 @@ class MyNavBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
+          // Sombra debajo de la barra de navegación
           BoxShadow(
             color: Colors.black.withOpacity(0.5),
             blurRadius: 5,
@@ -103,15 +108,24 @@ class MyNavBar extends StatelessWidget {
         ],
       ),
       child: BottomNavigationBar(
-        currentIndex: currentIndex,
-        backgroundColor: Color.fromARGB(255, 118, 187, 119),
-        onTap: onTap,
-        selectedItemColor: Colors.brown,
-        unselectedItemColor: Color.fromARGB(255, 15, 74, 13),
+        currentIndex: currentIndex, // Índice actual
+        backgroundColor: Color.fromARGB(255, 118, 187, 119), // Color de fondo verde
+        onTap: onTap, // Función que se ejecuta al seleccionar un ítem
+        selectedItemColor: Colors.brown, // Color de ítem seleccionado
+        unselectedItemColor: Color.fromARGB(255, 15, 74, 13), // Color de ítem no seleccionado
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home, size: 35), label: "Inicio"),
-          BottomNavigationBarItem(icon: Icon(Icons.auto_graph, size: 35), label: "Progreso"),
-          BottomNavigationBarItem(icon: Icon(Icons.add, size: 35), label: "Nueva tarea"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 35), 
+            label: "Inicio", // Etiqueta para la pestaña de inicio
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.auto_graph, size: 35), 
+            label: "Progreso", // Etiqueta para la pestaña de progreso
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add, size: 35), 
+            label: "Nueva tarea", // Etiqueta para la pestaña de nueva tarea
+          ),
         ],
       ),
     );

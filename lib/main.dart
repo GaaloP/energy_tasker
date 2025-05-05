@@ -1,4 +1,4 @@
-import 'package:energy_tasker/pages/all_tasks.dart';
+import 'package:energy_tasker/pages/all_tasks_page.dart';
 import 'package:energy_tasker/pages/max_energy_page.dart';
 import 'package:energy_tasker/pages/min_energy_page.dart';
 import 'package:energy_tasker/pages/mid_energy_page.dart';

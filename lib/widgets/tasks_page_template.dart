@@ -1,14 +1,15 @@
 import 'package:energy_tasker/widgets/task_card.dart';
 import 'package:flutter/material.dart';
-import 'package:energy_tasker/pages/all_tasks.dart';
+import 'package:energy_tasker/pages/all_tasks_page.dart';
 
+/// Página que muestra tareas agrupadas por tipo de energía (alta, media, baja)
 class EnergyTaskPage extends StatefulWidget {
-  final String title;
-  final String subtitle;
-  final String icon;
-  final Color appBarColor;
-  final Color taskColor;
-  final List<Map<String, dynamic>> tasks;
+  final String title; // Título mostrado en la AppBar
+  final String subtitle; // Subtítulo mostrado debajo del ícono
+  final String icon; // Emoji o símbolo que representa el tipo de energía
+  final Color appBarColor; // Color del AppBar
+  final Color taskCardColor; // Color de las tarjetas de tarea (no completadas)
+  final List<Map<String, dynamic>> tasks; // Lista de tareas a mostrar
 
   const EnergyTaskPage({
     super.key,
@@ -16,7 +17,7 @@ class EnergyTaskPage extends StatefulWidget {
     required this.subtitle,
     required this.icon,
     required this.appBarColor,
-    required this.taskColor,
+    required this.taskCardColor,
     required this.tasks,
   });
 
@@ -29,54 +30,55 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // Botón de regreso
         leading: IconButton(
-          icon: Icon(Icons.keyboard_arrow_left_outlined),
+          icon: const Icon(Icons.keyboard_arrow_left_outlined),
           onPressed: () {
-            Navigator.pop(context);
-            FocusScope.of(context).unfocus(); // Para cerrar el teclado
-          } 
+            Navigator.pop(context); // Regresa a la pantalla anterior
+            FocusScope.of(context).unfocus(); // Cierra el teclado si está activo
+          },
         ),
-        
         title: Text(widget.title),
         backgroundColor: widget.appBarColor,
         foregroundColor: Colors.black,
       ),
       body: Column(
         children: [
-          SizedBox(height: 20),
-          Text(widget.icon, style: TextStyle( fontSize: 40)),
+          const SizedBox(height: 20),
+          Text(widget.icon, style: const TextStyle(fontSize: 40)), // Icono/emoji de energía
           Text(
             widget.subtitle,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TaskList(
             tasks: widget.tasks,
-            taskColor: widget.taskColor,
+            taskColor: widget.taskCardColor,
           ),
-         ],
+        ],
       ),
+      // Botón inferior para ir a la vista de todas las tareas
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: ElevatedButton.icon(
             onPressed: () async {
               await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => AllTasksPage()),
+                MaterialPageRoute(builder: (_) => const AllTasksPage()),
               );
-              setState(() {}); // Para actualizar si hay cambios
+              setState(() {}); // Refresca la vista al volver
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: widget.appBarColor,
               foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(vertical: 14),
+              padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
             ),
-            icon: Icon(Icons.arrow_forward),
-            label: Text(
+            icon: const Icon(Icons.arrow_forward),
+            label: const Text(
               'Ver tus tareas',
               style: TextStyle(fontSize: 16),
             ),
@@ -87,11 +89,16 @@ class _EnergyTaskPageState extends State<EnergyTaskPage> {
   }
 }
 
+/// Widget que representa la lista de tareas mostradas
 class TaskList extends StatefulWidget {
-  const TaskList({super.key, required this.tasks, required this.taskColor});
-
   final List<Map<String, dynamic>> tasks;
   final Color taskColor;
+
+  const TaskList({
+    super.key,
+    required this.tasks,
+    required this.taskColor,
+  });
 
   @override
   State<TaskList> createState() => _TaskListState();
@@ -100,9 +107,9 @@ class TaskList extends StatefulWidget {
 class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
-    return  Expanded(
+    return Expanded(
       child: ListView.builder(
-        padding: EdgeInsets.only(bottom: 20),
+        padding: const EdgeInsets.only(bottom: 20),
         itemCount: widget.tasks.length,
         itemBuilder: (context, i) {
           final tarea = widget.tasks[i];
@@ -112,17 +119,21 @@ class _TaskListState extends State<TaskList> {
             tarea: tarea,
             completada: completada,
             colores: completada
-                ? [Color.fromARGB(255, 180, 255, 183), Color.fromARGB(255, 239, 247, 240)]
+                // Si la tarea está completada, usar colores suaves
+                ? [
+                    const Color.fromARGB(255, 180, 255, 183),
+                    const Color.fromARGB(255, 239, 247, 240),
+                  ]
+                // Si no, usar el color principal
                 : [widget.taskColor, widget.taskColor],
             onTap: () {
               setState(() {
-                tarea['completada'] = !completada;
+                tarea['completada'] = !completada; // Alterna estado de completado
               });
             },
           );
         },
       ),
     );
-        
   }
 }
