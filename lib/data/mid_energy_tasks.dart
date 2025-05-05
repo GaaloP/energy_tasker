@@ -14,34 +14,4 @@ final List<Map<String, dynamic>> tareasMid = [
       'descripcion': 'Algo que te interese o motive.',
       'completada': false,
     },
-    
-    {
-      'titulo': 'Ver un video educativo',
-      'descripcion': 'Algo que te interese o motive.',
-      'completada': false,
-    },
-    
-    {
-      'titulo': 'Ver un video educativo',
-      'descripcion': 'Algo que te interese o motive.',
-      'completada': false,
-    },
-    
-    {
-      'titulo': 'Ver un video educativo',
-      'descripcion': 'Algo que te interese o motive.',
-      'completada': false,
-    },
-    
-    {
-      'titulo': 'Ver un video educativo',
-      'descripcion': 'Algo que te interese o motive.',
-      'completada': false,
-    },
-    
-    {
-      'titulo': 'Ver un video educativo',
-      'descripcion': 'Algo que te interese o motive.',
-      'completada': false,
-    },
   ];
