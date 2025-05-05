@@ -1,16 +1,55 @@
-# energy_tasker
+# Energy Tasker
 
-A new Flutter project.
+Una aplicación para gestionar tareas según tu nivel de energía diario.
 
-## Getting Started
+## 📋 Descripción
+Energy Tasker es una aplicación desarrollada en Flutter que te ayuda a organizar tus tareas según cómo te sientes cada día (alta energía, energía media o baja energía). La aplicación incluye un sistema de progreso visual que recompensa tus logros.
 
-This project is a starting point for a Flutter application.
+## ✨ Características principales
+- Selector de estado de ánimo con emojis (😄/😒/🤒)
+- Tareas recomendadas según tu nivel de energía
+- Sistema de progreso con árbol que crece al completar tareas
+- Visualización consolidada de todas las tareas
+- Formulario intuitivo para agregar nuevas tareas
+- Interfaz colorida y amigable
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tecnologías
+- Frontend: Flutter/Dart
+- Gestión de estado: StatefulWidget
+- Diseño: Widgets Material personalizados
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📁 Estructura del proyecto
+```
+energy_tasker/
+├── lib/
+│   ├── data/              # Datos de tareas por categoría
+│   ├── pages/             # Pantallas principales
+│   └── widgets/           # Componentes reutilizables
+├── assets/                # Imágenes de progreso
+└── pubspec.yaml           # Configuración del proyecto
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ⚙️ Requisitos
+- Flutter 3.0+
+- Android 8.0+ o iOS 11+
+
+## 🚀 Instalación y ejecución
+1. Clona el repositorio:
+```bash
+git clone https://github.com/GaaloP/energy_tasker.git
+```
+2. Instala las dependencias:
+```bash
+flutter pub get
+```
+3. Ejecuta la aplicación:
+```bash
+flutter run
+```
+
+## 👥 Equipo de desarrollo
+- Eduardo Jafet Ibarra Maldonado
+- Gael De Jesus Posada Hernández
+
+## 📊 Estado del proyecto
+El proyecto actual se encuentra en fase operativa, cumpliendo con los requerimientos básicos establecidos, y presenta oportunidades significativas para la implementación de funcionalidades adicionales que podrían enriquecer su valor académico y práctico
